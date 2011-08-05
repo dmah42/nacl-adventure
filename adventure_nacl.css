@@ -1,0 +1,13 @@
+#output {
+  font-family:Andale Mono, Courier New, Courier, Fixed, monospace;
+  border: 3px solid #cccccc;
+  padding: 5px;
+  width: 480px;
+  height: 300px;
+}
+
+#input {
+  border: 2px solid #cccccc;
+  padding: 4px;
+  width: 485px;
+}
