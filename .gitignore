@@ -1,0 +1,7 @@
+advtxt_to_c
+*.o
+advent?.c
+advent?.h
+*.nmf
+*.nexe
+.sconsign.dblite

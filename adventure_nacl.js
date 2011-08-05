@@ -9,6 +9,12 @@ function moduleDidLoad() {
   AdventureNaclModule.addEventListener('message', handleMessage, false);
   updateStatus('SUCCESS');
 
+  restart_game();
+}
+
+function restart_game() {
+  document.getElementById('output').value = '';
+  document.getElementById('input').value = '';
   document.getElementById('input').focus();
   AdventureNaclModule.postMessage('start_game');
 }

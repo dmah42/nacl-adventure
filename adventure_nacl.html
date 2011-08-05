@@ -24,11 +24,9 @@
 </div>
 
 <form onsubmit="postInput(); return false;">
-<!--            cols="72" rows="24"-->
-  <textarea id="output"
-            readonly="readonly"></textarea><br/>
+  <input type="button" id="restart" onclick="restart_game()" value="Restart"></input><br/>
+  <textarea id="output" readonly="readonly"></textarea><br/>
   <input type="text" id="input"></input>
-  <!--<input type="submit" value="Enter"></input>-->
 </form>
 </body>
 </html>
