@@ -24,7 +24,9 @@
 </div>
 
 <form onsubmit="postInput(); return false;">
-  <input type="button" id="restart" onclick="restart_game()" value="Restart"></input><br/>
+  <input type="button" id="restart" onclick="restart_game()"
+         value="Restart"></input>
+  <span id="error"></span><br/>
   <textarea id="output" readonly="readonly"></textarea><br/>
   <input type="text" id="input"></input>
 </form>

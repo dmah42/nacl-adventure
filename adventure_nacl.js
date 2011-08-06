@@ -9,10 +9,10 @@ function moduleDidLoad() {
   AdventureNaclModule.addEventListener('message', handleMessage, false);
   updateStatus('SUCCESS');
 
-  restart_game();
+  restartGame();
 }
 
-function restart_game() {
+function restartGame() {
   document.getElementById('output').value = '';
   document.getElementById('input').value = '';
   document.getElementById('input').focus();
@@ -34,9 +34,13 @@ function handleMessage(message_event) {
     case 's':
       appendOutput(message);
       break;
+    case 'e':
+      setError('Fatal error: ' + message);
+      restartGame();
+      break;
     default:
       console.debug('unknown event type ' + type + ' for message ' +
-          message);
+                    message);
       break;
   }
 }
@@ -77,5 +81,27 @@ function appendOutput(message) {
   var output = document.getElementById('output');
   output.value += message;
   output.scrollTop = output.scrollHeight;
+}
+
+var hex = 0;
+
+function fadeError() {
+  var error = document.getElementById('error');
+  if (hex < 255) {
+    hex += 5;
+    error.style.color = 'rgb(255,'+hex+','+hex+')';
+  } else {
+    error.innerHTML = '';   
+  }
+
+  window.setTimeout('fadeError()', 30);
+}
+
+function setError(message) {
+  var error = document.getElementById('error');
+  error.innerHTML = message;
+  hex = 0;
+  error.style.color = 'rgb(255,'+hex+','+hex+')';
+  window.setTimeout('fadeError()', 1500);
 }
 

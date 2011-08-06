@@ -41,7 +41,7 @@ char *game_name P((char *username));
 /*     380 */ int liq P((void ));
 /*     391 */ int liqloc P((int loc ));
 /*     405 */ int liq2 P((int pbottle ));
-/*     414 */ int bug P((int n ));
+/*     414 */ void bug P((int n ));
 
 /* english.c */
               void english P((void (*english_result)(int)));

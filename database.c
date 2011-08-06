@@ -27,7 +27,7 @@
 
 extern void WaitForInput(int (*input_cb)(const char*, void*, void*),
                          void* a, void* b);
-
+extern void HandleFatalError(int err);
 
 /*
 	Routine to fill travel array for a given location
@@ -117,6 +117,7 @@ void (*yes_result_)(int) = NULL;
 int yes_complete(const char* answer, void* msg2, void* msg3) {
   console_printf(answer);
   const char answer_char = answer[0];
+
 	if (answer_char == 'n' || answer_char == 'N') {
 		if (msg3)
 			rspeak((int) msg3);
@@ -440,10 +441,14 @@ int liq2(int pbottle)
 /*
 	Fatal error routine
 */
-int bug(int n)
+void bug(int n)
 {
-	console_printf("Fatal error number %d\n", n);
+#ifdef NATIVE_CLIENT
+  HandleFatalError(n);
+#else
+  console_printf("Fatal error number %d\n", n);
 	exit(-1);
+#endif
 }
 
 

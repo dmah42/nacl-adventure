@@ -11,3 +11,8 @@
   padding: 4px;
   width: 485px;
 }
+
+#error {
+  font-style: italic;
+  color: red;
+}

@@ -21,6 +21,7 @@
 /// NaCl module.
 
 #include <cstdio>
+#include <sstream>
 #include <string>
 #include "ppapi/cpp/instance.h"
 #include "ppapi/cpp/module.h"
@@ -65,20 +66,15 @@ class AdventureNaclInstance : public pp::Instance {
       size_t split = message.find_first_of(":");
       std::string command = message.substr(0, split);
       if (command == "start_game") {
-        PostConsoleMessage("Starting game...");
         nacl_main();
       } else if (command == "input") {
-        PostConsoleMessage((std::string("input: ") + message).c_str());
         std::string input = message.substr(split + 1);
 
         // Local echo
         PostScreenMessage(input + "\n");
 
-        printf("Calling input cb %p\n", input_cb_);
-        if (input_cb_) {
+        if (input_cb_)
           input_cb_(input.c_str(), a_, b_);
-//          SetInputCallback(NULL, NULL, NULL);
-        }
       }
     }
   }
@@ -91,9 +87,14 @@ class AdventureNaclInstance : public pp::Instance {
     PostMessage(pp::Var(std::string("c") + message));
   }
 
+  void PostErrorMessage(int err) {
+    std::stringstream ss;
+    ss << err;
+    PostMessage(pp::Var(std::string("e") + ss.str()));
+  }
+
   void SetInputCallback(int (*input_cb)(const char*, void*, void*),
                         void* a, void* b) {
-    printf("Setting input cb %p\n", input_cb);
     input_cb_ = input_cb;
     a_ = a;
     b_ = b;
@@ -124,6 +125,8 @@ Module* CreateModule() { return new AdventureNaclModule(); }
 
 }  // namespace pp
 
+
+// C interface to module.
 extern "C" {
 
 void PostScreenMessage(const char* message) {
@@ -137,6 +140,10 @@ void PostConsoleMessage(const char* message) {
 void WaitForInput(int (*input_cb)(const char*, void*, void*),
                   void* a = NULL, void* b = NULL) {
   instance_->SetInputCallback(input_cb, a, b);
+}
+
+void HandleFatalError(int err) {
+  instance_->PostErrorMessage(err);
 }
 
 }
