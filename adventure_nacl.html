@@ -9,6 +9,34 @@
 <body onload="pageDidLoad()">
 
 <h1>Colossal Cave Adventure for Native Client</h1>
+<table id="content_table">
+<tr>
+<td>
+  <a href="http://en.wikipedia.org/wiki/Colossal_Cave_Adventure">About</a>
+</td>
+<td>
+  <a href="http://code.google.com/p/nacl-adventure">Source</a>
+</td>
+<td>
+  <a href="http://mirror.ifarchive.org/if-archive/games/source/advqnx.tar.gz">Original Source</a>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+  <input type="button" id="restart" onclick="restartGame()"
+         value="Restart"></input>
+  <input type="button" id="save" onclick="saveGame()" value="Save"
+         disabled="disabled"></input>
+  <input type="button" id="load" onclick="restoreGame()" value="Load"
+         disabled="disabled"></input><br/>
+  <span id="error"></span><br/>
+<form onsubmit="postInput(); return false;">
+  <textarea id="output" readonly="readonly"></textarea><br/>
+  <input type="text" id="input"></input>
+</form>
+</td>
+</tr>
+</table>
 <div id="listener">
   <script type="text/javascript">
      document.getElementById('listener').addEventListener('load',
@@ -23,16 +51,5 @@
          type="application/x-nacl" />
 </div>
 
-<form onsubmit="postInput(); return false;">
-  <input type="button" id="restart" onclick="restartGame()"
-         value="Restart"></input>
-  <input type="button" id="save" onclick="saveGame()" value="Save"
-         disabled="disabled"></input>
-  <input type="button" id="load" onclick="restoreGame()" value="Load"
-         disabled="disabled"></input>
-  <span id="error"></span><br/>
-  <textarea id="output" readonly="readonly"></textarea><br/>
-  <input type="text" id="input"></input>
-</form>
 </body>
 </html>

@@ -16,3 +16,15 @@
   font-style: italic;
   color: red;
 }
+
+#content_table {
+  border: 1px solid #eeeeee;
+  padding: 4px;
+  text-align: center;
+}
+
+td {
+  padding: 4px;
+  margin: 2px;
+  border: 2px solid #eeeeee;
+}
