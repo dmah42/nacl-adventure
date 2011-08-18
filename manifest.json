@@ -1,0 +1,18 @@
+{
+  "name": "Colossal Cave Adventure",
+  "description": "A port of the original Colossal Cave Adventure to Native Client.",
+  "version": "0.0.1",
+  "minimum_chrome_version": "14",
+  "app": {
+    "launch": {
+      "local_path": "adventure_nacl.html"
+    }
+  },
+  "icons": {
+    "16": "icon_16.png",
+    "128": "icon_128.png"
+  },
+  "permissions": [
+    "unlimitedStorage"
+  ]
+}
